@@ -1,0 +1,16 @@
+# Corremos el contenedor
+docker run -d -v ollama:/home/daniel/.ollama -p 11434:11434 --name ollama ollama/ollama
+
+#Agregamos un modelo
+curl http://localhost:11434/api/pull -d '{
+  "model": "llama3.2"
+}'
+
+#
+curl -X GET http://localhost:11434/api/ps
+
+# prueba
+curl http://localhost:11434/api/generate -d '{
+  "model": "llama3.2",
+  "prompt": "Why is the sky blue?"
+}'
